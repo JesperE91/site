@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Holmen Innovation – Superrastret</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-dark: #1E3856; /* Holmen Blue Dark */
+      --primary-medium: #2A4E7A; /* Slightly lighter primary */
+      --accent-green: #4CAF50; /* A fresh green for accents */
+      --accent-blue: #0F233B; /* Darker accent, almost black blue */
+      --background-light: #F8F8F8; /* Soft light background */
+      --text-color: #333333; /* Darker text for readability */
+      --white: #ffffff;
+      --button-hover-dark: #367c39; /* Darker green on hover */
+      --button-hover-light: #5cb85c; /* Lighter green on hover */
+
+      /* Opacity for overlays on background images */
+      --overlay-opacity: 0.2; /* Increased opacity for better text readability over images */
+    }
+
+    /* --- Global Styles --- */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-weight: 400;
+      background-color: var(--background-light);
+      color: var(--text-color);
+      line-height: 1.7; /* Improved line height for readability */
+      scroll-behavior: smooth;
+      overflow: hidden; /* Disable default body scrolling */
+    }
+
+    /* --- Hero Section --- */
+    .hero {
+      height: 100vh;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: var(--white);
+      scroll-snap-align: start;
+      overflow: hidden; /* Ensure background animation stays within bounds */
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('https://images.unsplash.com/photo-1655188290798-51ee527916fe?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG0dG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+      background-size: cover; /* Use cover to ensure image fills the space */
+      background-position: center;
+      background-repeat: no-repeat;
+      z-index: -2;
+      animation: zoomPan 30s infinite alternate ease-in-out; /* Slower, smoother animation */
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5); /* Darker overlay for better text contrast */
+      z-index: -1;
+    }
+
+    .hero h1 {
+      font-size: 8rem; /* Adjusted for better balance */
+      text-shadow: 3px 3px 6px rgba(0,0,0,0.7); /* Stronger shadow for readability */
+      animation: fadeIn 2s ease-in;
+      margin-bottom: 0.8rem;
+      font-weight: 700; /* Bold */
+    }
+
+    .hero p {
+      font-size: 2.5rem; /* Adjusted */
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.6); /* Shadow for readability */
+      animation: fadeIn 2s ease-in;
+      margin-bottom: 2rem; /* Space before buttons */
+    }
+
+    .hero .button-group {
+      display: flex; /* Always display buttons */
+      flex-wrap: wrap; /* Allow wrapping on smaller screens */
+      justify-content: center;
+      gap: 1.5rem; /* Space between buttons */
+      animation: fadeIn 2.5s ease-in;
+    }
+
+    .hero button {
+      padding: 1.2rem 2.5rem; /* Larger padding for better touch targets */
+      font-size: 1.2rem;
+      background-color: var(--accent-green); /* Green buttons for action */
+      border: none;
+      border-radius: 10px; /* Slightly more rounded corners */
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease; /* Add transform for subtle click effect */
+      color: var(--white);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.3); /* Stronger shadow */
+      font-weight: 500;
+    }
+
+    .hero button:hover {
+      background-color: var(--button-hover-dark);
+      transform: translateY(-3px); /* Lift button on hover */
+    }
+
+    .hero button:active {
+      transform: translateY(0); /* Press button on click */
+    }
+
+    /* --- Scroll Sections (parent containers for background images) --- */
+    .scroll-section {
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed; /* Parallax effect */
+      position: relative;
+      min-height: 100vh;
+      padding: 6rem 0; /* More vertical padding */
+      display: flex;
+      flex-direction: column;
+      justify-content: center; /* Align content to the top */
+      align-items: center;
+      scroll-snap-align: start;
+    }
+
+    #om-oss {
+      background-image: url('https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?q=80&w=2006&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    }
+
+    /* All 'analys' sections share a common background */
+    #analys, #analys-del2, #analys-del3, #analys-del4, #analys-del5 {
+      background-image: url('https://images.unsplash.com/photo-1727646355060-190887e866b0?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    }
+
+    /* Overlay for background images */
+    .scroll-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, var(--overlay-opacity)); /* Uses the new overlay opacity */
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* --- Content Sections (the white boxes) --- */
+    section {
+      position: relative;
+      z-index: 1;
+      max-width: 2000px; /* Slightly narrower for better line length */
+      width: 90%; /* Responsive width */
+      margin: 2rem auto;
+      background-color: var(--white); /* Solid white background */
+      border-radius: 15px; /* More rounded corners */
+      padding: 2rem; /* Generous padding */
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15); /* Softer, larger shadow */
+      animation: slideUp 1s ease-out;
+    }
+
+    /* Ensure the first section in a scroll-section has top margin */
+    .scroll-section > section:first-of-type {
+      margin-top: 4rem; /* Provides space from the top of the parent div */
+    }
+
+    /* --- Typography --- */
+    h2 {
+      color: var(--accent-blue);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem; /* More space between icon and text */
+      font-size: 3.2rem; /* Larger H2 */
+      font-weight: 700;
+      text-align: center; /* Center align H2 for wider appeal */
+      width: 100%; /* Ensure it takes full width for centering */
+      justify-content: center; /* Center content including icon */
+    }
+
+    h3 {
+      color: var(--primary-dark);
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 2.5rem; /* Rubriker på smårutor i stora rutor */
+      font-weight: 700;
+    }
+
+    p {
+      margin-bottom: 1.2rem; /* Consistent spacing for paragraphs */
+      font-size: 2rem; /* Brödtext */
+      line-height: 1.8; /* Generous line height */
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+
+    ul {
+      list-style: none; /* Remove default bullet */
+      padding-left: 0; /* Remove default padding */
+      margin-top: 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 1.15rem;
+    }
+
+    ul li {
+      position: relative;
+      padding-left: 1.8rem; /* Space for custom bullet */
+      margin-bottom: 0.6rem;
+      line-height: 1.6;
+    }
+
+    ul li::before {
+      content: '•'; /* Custom bullet point */
+      color: var(--accent-green);
+      position: static;
+      left: 0;
+      font-size: 1.5rem; /* Punkter */
+      top: 0;
+    }
+
+    /* --- Content Flex/Grid Areas --- */
+    .content-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+      gap: 2.5rem; /* More space between items */
+      margin-top: 2rem;
+    }
+
+    .feature-item {
+      background-color: var(--background-light); /* Lighter background for feature items */
+      padding: 2.5rem; /* Increased padding */
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* Softer shadow */
+      transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+    }
+
+    .feature-item:hover {
+      transform: translateY(-5px); /* Lift on hover */
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15); /* Enhanced shadow on hover */
+    }
+
+    .feature-item p {
+      font-size: 2rem; /* Brödtext i smårutor */
+      line-height: 1.6;
+    }
+
+    /* --- Image Content Styling --- */
+    .image-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 1.5rem; /* Padding around image */
+    }
+
+    .image-content img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    }
+
+    /* --- Footer --- */
+    footer {
+      text-align: center;
+      padding: 3rem; /* More padding */
+      font-size: 0.95rem; /* Slightly larger footer text */
+      color: var(--primary-dark);
+      background-color: var(--background-light);
+    }
+
+    /* --- Animations --- */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(60px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes zoomPan {
+      0% { background-size: 120%; background-position: 0% 0%; }
+      100% { background-size: 100%; background-position: 100% 100%; }
+    }
+
+    /* --- Media Queries for Responsiveness --- */
+    @media (max-width: 1024px) {
+      .hero h1 {
+        font-size: 6rem;
+      }
+      .hero p {
+        font-size: 2rem;
+      }
+      section {
+        padding: 3rem;
+      }
+      h2 {
+        font-size: 2.5rem;
+      }
+      h3 {
+        font-size: 1.6rem;
+      }
+      p, ul {
+        font-size: 1.05rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      body {
+        overflow: auto; /* Re-enable scrolling on small screens if scroll-snap is problematic */
+      }
+      .hero h1 {
+        font-size: 4rem;
+      }
+      .hero p {
+        font-size: 1.5rem;
+      }
+      .hero .button-group {
+        flex-direction: column; /* Stack buttons vertically */
+        gap: 1rem;
+      }
+      .hero button {
+        width: 80%; /* Make buttons wider */
+        max-width: 300px;
+      }
+      section {
+        padding: 2rem;
+        width: 95%;
+        margin: 1.5rem auto;
+      }
+      h2 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        gap: 0.5rem;
+      }
+      h3 {
+        font-size: 1.4rem;
+      }
+      p, ul {
+        font-size: 1rem;
+      }
+      .feature-item {
+        padding: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 3rem;
+      }
+      .hero p {
+        font-size: 1.2rem;
+      }
+      section {
+        padding: 1.5rem;
+      }
+      h2 {
+        font-size: 1.8rem;
+      }
+      h3 {
+        font-size: 1.2rem;
+      }
+      .image-content {
+        padding: 0.5rem;
+      }
+    }
+
+    /* Container for scroll-snapping sections */
+    #scroll-container {
+      height: 100vh; /* Make the container take full viewport height */
+      overflow-y: scroll; /* Enable scrolling within this container */
+      scroll-snap-type: y mandatory; /* Enable mandatory scroll-snapping on the Y-axis */
+    }
+  </style>
+</head>
+<body>
+
+<div id="scroll-container">
+  <div class="hero">
+    <h1>Superrastret</h1>
+    <p>Innovation för framtidens skogsdata</p>
+    <div class="button-group">
+      <button onclick="scrollToSection('om-oss')">Om oss</button>
+      <button onclick="scrollToSection('analys')">Projektöversikt</button>
+      <button onclick="scrollToSection('analys-del2')">Skoglig Grunddata</button>
+      <button onclick="scrollToSection('analys-del3')">SI-Karta</button>
+      <button onclick="scrollToSection('analys-del4')">Metod & Teknik</button>
+      <button onclick="scrollToSection('analys-del5')">Ytstruktur & Terräng</button>
+    </div>
+  </div>
+
+    <div id="om-oss" class="scroll-section">
+    <section>
+      <h2>Om Analysavdelningen</h2>
+      <p>Välkommen till Holmen Skogs analysavdelning! Vi är navet för innovation och datadriven utveckling inom skogsbruket. Vårt uppdrag är att transformera rådata till handlingsbar insikt som optimerar varje steg i Holmens värdekedja.</p>
+      <p>Genom att ligga i framkant med teknik och metodik säkerställer vi att Holmen fortsätter att vara ledande inom hållbart och effektivt skogsbruk. Här möts kompetens, nyfikenhet och den senaste teknologin för att forma framtidens skogsförvaltning.</p>
+      <h3>Vårt team:</h3>
+      <ul>
+        <li>Team Lead: <a href="mailto:javier.segura@holmen.com">Javier Segura</a></li>
+        <li>GIS-Analytiker: <a href="mailto:ambjorn.forslund@holmen.com">Ambjörn Forslund</a></li>
+        <li>Datascientist: <a href="mailto:mikael.israelsson@holmen.com">Mikael Israelsson</a></li>
+        <li>Datascientist: <a href="mailto:jesper.ericson@holmen.com">Jesper Ericson</a></li>
+      </ul>
+    </section>
+  </div>
+
+    <div id="analys" class="scroll-section">
+    <section>
+      <h2>🌳 Vad är Superrastret?</h2>
+      <p>
+        Superrastret är en strategisk satsning som sammanför skogliga data i ett smart helhetslager – från skördardata och laserskanning till satellitbilder. Allt för att förbättra analys, planering och fältarbete inom Holmen Skog.
+      </p>
+    </section>
+
+    <section>
+      <h2>🎯 Projektmål</h2>
+      <div class="content-grid">
+        <div class="feature-item">
+          <h3>Datalager</h3>
+          <p>Ett sammanhängande och dynamiskt datalager för att integrera all skoglig information effektivt.</p>
+        </div>
+        <div class="feature-item">
+          <h3>Förbättrade Prognoser</h3>
+          <p>Noggrannare prognoser för volym, trädslag, höjd och stamantal med avancerade modeller.</p>
+        </div>
+        <div class="feature-item">
+          <h3>Förändringsanalys</h3>
+          <p>Automatiskt upptäcka skador, gallringar och avverkningar genom sofistikerad förändringsanalys.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+    <div id="analys-del2" class="scroll-section">
+    <section>
+        <h2>🌲 Förbättring av SGD med skördardata</h2>
+      <div class="content-grid" style="grid-template-columns: 1fr 2fr;">
+        <div>
+          <p>Vi vet att Skogliga Grunddata har sina brister och därför har vi i detta projekt utforskat möjligheten att förbättra viktiga variabler med hjälp avskördardata.</p>
+          <p>Genom att använda skördardata från avverkningar eller gallringar som skett inom ett år efter laserskanningen, och berika dessa med nya laserdatametriker och andra geografiska data, kan vi med hjälp av en maskininlärningsmodell prediktera nya utfall på:</p>
+          <ul>
+            <li>Volym</li>
+            <li>Diameter</li>
+            <li>Höjd</li>
+            <li>Grundyta</li>
+            <li>Stamantal</li>
+          </ul>
+          <p>Skördardata ger oss värdefull och exakt information vid tidpunkten för avverkning eller gallring, vilket är avgörande för modellens precision.</p>
+        </div>
+        <div class="image-content">
+          <img src="scatterplot.png" alt="Scatterplottar från modellen">
+          <p style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">Exempel på prediktionsresultat från vår maskininlärningsmodell.</p>
+        </div>
+      </div>
+      <h2>📊 Resultat och Nästa Steg</h2>
+      <p>Initiala resultat visar lågt medelfel (RMSE%) med hjälp av skördardata, vilket bekräftar potentialen i denna metod. Inferens kan ske både för specifika bestånd och som heltäckande raster för hela Sverige.</p>
+      <p>Tidigare forskning indikerar att medelfelen kan sänkas ytterligare genom att tillföra fler laserdatametriker. Detta blir vårt nästa fokusområde för att ytterligare förfina modellernas noggrannhet.</p>
+    </section>
+  </div>
+
+    <div id="analys-del3" class="scroll-section">
+    <section>
+      <h2>🌲 Heltäckande SI-Karta</h2>
+      <p>En betydande del av Superrastret är vår ansats att skapa en heltäckande SI-karta (stortsindexkarta). Denna nya karta är framtagen för att komplettera och förbättra den befintliga SI-kartan som publiceras idag.</p>
+      <p>Målet är att ge en ännu mer detaljerad och aktuell bild av markens bonitet och produktionsförmåga över Holmens markinnehav. Genom att integrera data från flera källor och tillämpa avancerade geografiska analysmetoder förbättrar vi vår förmåga att visualisera och analysera skogsproduktiviteten över större geografiska områden.</p>
+      <div class="image-content" style="margin-top: 2rem;">
+        <img src="https://via.placeholder.com/800x500?text=SI-Karta+Example" alt="Exempel på SI-karta">
+        <p style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">Visualisering av den nya, heltäckande SI-kartan.</p>
+      </div>
+      <p style="margin-top: 1.5rem;">Denna förbättrade SI-karta kommer att vara ett ovärderligt verktyg för strategisk planering, optimering av skogsskötselåtgärder och för att maximera den långsiktiga hållbara avkastningen från våra skogar.</p>
+    </section>
+  </div>
+
+    <div id="analys-del4" class="scroll-section">
+    <section>
+      <h2>🧐 Metod & Teknik</h2>
+      <div class="content-grid">
+        <div class="feature-item">
+          <h3>🛠️ Sensorfusion</h3>
+          <p>Vi kombinerar data från flera sensorer (som laserskanning, satellitbilder och skördardata) för att uppnå högsta möjliga noggrannhet och detaljrikedom i våra analyser. Detta ger oss en mer komplett bild av skogen.</p>
+        </div>
+        <div class="feature-item">
+          <h3>🧠 ML-modeller</h3>
+          <p>Genom att använda avancerade maskininlärningsmodeller kan vi göra prediktioner och analyser som täcker hela Sverige. Detta möjliggör automatiserade insikter i stor skala.</p>
+        </div>
+        <div class="feature-item">
+          <h3>⚙️ Effektiva Datapipelines</h3>
+          <p>Vi bygger robusta och effektiva datapipelines som säkerställer kontinuerlig insamling, bearbetning och uppdatering av all skoglig data, från källa till analys.</p>
+        </div>
+        <div class="feature-item">
+          <h3>🤖 AI-driven Utveckling</h3>
+          <p>Vi utnyttjar AI-verktyg som OpenAI Codex och liknande för att effektivisera och automatisera vår kodutveckling, vilket påskyndar innovationstakten och minskar utvecklingstiden.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+    <div id="analys-del5" class="scroll-section">
+    <section>
+        <h2>🏞️ Ytstruktur & Terräng Klassificering</h2>
+        <p>
+            Som en del av Superrastret beräknar vi detaljerade terrängparametrar som lutning, TPI (Topographic Position Index), kurvatur och ojämnhet. Dessa parametrar används för att skapa en omfattande klassificering av varje bestånd utifrån dess ytstruktur och terräng.
+        </p>
+        <p>
+            Denna process ger oss en djupgående förståelse för markens beskaffenhet, vilket är helt avgörande för att fatta välgrundade beslut vid planering och genomförande av skogsbruksåtgärder.
+        </p>
+
+        <div class="image-content" style="margin-top: 2.5rem;">
+            <img src="ytstuktur.png" alt="Exempel på ytstruktur och terrängklassificering">
+            <p style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">Visualisering av olika terrängklasser baserade på vår analys.</p>
+        </div>
+
+        <h3>Potentiella terrängkategorier:</h3>
+        <ul>
+                <p><strong>Platt & homogen</strong></p>
+                <p><strong>Konvex höjd / Konkav lågmark</strong></p>
+                <p><strong>Kuperad terräng</strong></p>
+                <p><strong>Blandad ytstruktur</strong></p> 
+        </ul>
+    </section>
+</div>
+
+  <footer>
+    © 2025 Holmen Skog – Analysavdelningen | Innovation för framtidens skogsdata
+  </footer>
+</div>
+
+<script>
+  // Function to scroll to a specific section
+  function scrollToSection(id) {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+</script>
+</body>
+</html>
